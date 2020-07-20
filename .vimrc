@@ -28,6 +28,12 @@ map j <C-W>j
 map k <C-W>k
 map l <C-W>l
 
+  "-- 改变窗口大小"
+nnoremap - <C-W>-
+nnoremap = <C-W>+
+nnoremap , <C-W><
+nnoremap . <C-W>>
+
   "-- 全选"
 map a ggVG
 
