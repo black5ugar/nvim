@@ -1,83 +1,88 @@
-"********************显示设置********************"
+"********************显示设置********************
 
-"## 行号"
+"## 行号
 set nu
 
-"## 显示光标当前位置"
+"## 显示光标当前位置
 set ruler
 
-"## tab为4个空格”
+"## tab为4个空格
 set ts=4
 set expandtab
 set shiftwidth=4
 
+"## 上下显示
+set scrolloff=5
 
-"********************功能设置********************"
+"********************功能设置********************
 
-"## 编码设置"
+"## 编码设置
 set encoding=utf-8
 
-"## 按键映射"
+"## 按键映射
 
-  "-- ESC按键映射"
+"-- ESC按键映射
 imap jj <Esc>
 
-  "-- 窗口切换"
+"-- 窗口切换
 map h <C-W>h
 map j <C-W>j
 map k <C-W>k
 map l <C-W>l
 
-  "-- 改变窗口大小"
+"-- 改变窗口大小
 nnoremap - <C-W>-
 nnoremap = <C-W>+
 nnoremap , <C-W><
 nnoremap . <C-W>>
 
-  "-- 全选"
+"-- 全选
 map a ggVG
 
-  "-- 保存"
+"-- 保存
 map s :w<CR>
 map q :x<CR>
 imap s jj:w<CR>
 imap q jj:x<CR>
 
-  "-- 行首行尾跳转"
+"-- 行首行尾跳转
 nnoremap H ^
 nnoremap L $
 
-  "-- j,k重映射"
+"-- j,k重映射
 nmap j gj
 nmap k gk
 
-"## 括号匹配"
+"-- 刷新当前文件
+nmap <F5> :so %<CR>
+
+"## 括号匹配
 set showmatch
 
-"## 禁用交换文件创建"
+"## 禁用交换文件创建
 set noswapfile
 
-"## 下方开启终端"
+"## 下方开启终端
 set splitbelow
 
-"## 一键运行当前脚本"
+"## 一键运行当前脚本
 map r :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
-	exec "w"
-	if &filetype == 'c'
-		exec "!g++ % -o %<"
-		exec "!time ./%<"
-	elseif &filetype == 'cpp'
-		exec "!g++ % -o %<"
-		exec "!time ./%<"
-	elseif &filetype == 'java' 
-		exec "!javac %" 
-		exec "!time java %<"
-	elseif &filetype == 'sh'
-		:!time bash %
-	elseif &filetype == 'python'
-		exec "!time python %"
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'java' 
+        exec "!javac %" 
+        exec "!time java %<"
+    elseif &filetype == 'sh'
+        :!time bash %
+    elseif &filetype == 'python'
+        exec "!time python %"
     elseif &filetype == 'html'
         exec "!firefox % &"
     elseif &filetype == 'go'
@@ -85,42 +90,43 @@ func! CompileRunGcc()
     elseif &filetype == 'mkd'
         exec "!~/.vim/markdown.pl % > %.html &"
         exec "!firefox %.html &"
-	endif
+    endif
 endfunc
 
-"**************vim-plug插件管理******************"
+"**************vim-plug插件管理******************
 call plug#begin('~/.vim/plugged')
 
-"## 目录树"
+"## 目录树
 Plug 'preservim/nerdtree' 
 
-  "-- 开启NerdTree"
+"-- 开启NerdTree
 map n :NERDTreeToggle<CR>
 
 
-"## 补全插件"
+"## 补全插件
 Plug 'Valloric/YouCompleteMe'
-  "-- 关闭补全预览框"
-  set completeopt=longest,menu
-  let g:ycm_add_preview_to_completeopt=0
+
+"-- 关闭补全预览框
+set completeopt=longest,menu
+let g:ycm_add_preview_to_completeopt=0
 
 
-"## Go用”
+"## Go用
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode'
 
-"## Tabgar"
+"## Tabgar
 Plug 'majutsushi/tagbar'
 
-  "-- 开启Tagbar"
+"-- 开启Tagbar
 map t :TagbarToggle<CR>
 
 
-"## 对齐插件"
+"## 对齐插件
 Plug 'godlygeek/tabular'
 
 
-"## 代码检查"
+"## 代码检查
 Plug 'dense-analysis/ale'
 let g:ale_fix_on_save = 1
 let g:ale_completion_enable = 1
@@ -130,38 +136,43 @@ let g:airline#extensions#ale#enabled = 1
 
 
 
-"## Markdown"
+"## Markdown
 
-  "-- Markdown 语法高亮“
+"-- Markdown 语法高亮
 Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled = 1
 
-  "-- Markdown 实时预览“
+"-- Markdown 实时预览
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-    "-- config Markdown actions"
+"-- config Markdown actions
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_browser = 'chromium'
 
-  "-- 快捷键"
+"-- 快捷键
 source ~/.vim/Markdown-snippits.vim
 
 nmap p :MarkdownPreview<CR>
 
-"## airline"
 
-  "-- airline"
+"## airline
+
+"-- airline
 Plug 'bling/vim-airline'
 
-  "-- airline-themes"
+"-- config airline
+" open the tabline
+let g:airline#extensions#tabline#enabled = 1
+
+"-- airline-themes
 Plug 'vim-airline/vim-airline-themes'
 
-    "-- config airline-themes"
+"-- config airline-themes
 let g:airline_theme="solarized"
 
 
-  "## 括号匹配“
+"## 括号匹配
 Plug 'Raimondi/delimitMate'
 call plug#end()
 "************************************************”
