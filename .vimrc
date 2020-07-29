@@ -1,71 +1,80 @@
-"********************显示设置********************
+"*********************************************************
+"**************    Display settings     ******************
+"*********************************************************
 
-"## 行号
+"## line number & relative line number
 set nu
+"set relativenumber
 
-"## 显示光标当前位置
+"## display the current position of the cursor
 set ruler
 
-"## tab为4个空格
+"## set <Tab> to for spaces
 set ts=4
 set expandtab
 set shiftwidth=4
 
-"## 上下显示
+"## bracket matching
+set showmatch
+
+"## scrolloff
 set scrolloff=5
 
-"********************功能设置********************
 
-"## 编码设置
+"*********************************************************
+"***************    Function settings   ******************
+"*********************************************************
+
+"## do not compatible with vi
+set nocompatible
+
+"## set encoding
 set encoding=utf-8
 
-"## 按键映射
+"## key mapping
 
-"-- ESC按键映射
-imap jj <Esc>
+"-- <Esc> key mapping
+inoremap jj <Esc>
 
-"-- 窗口切换
+"-- window switch
 map h <C-W>h
 map j <C-W>j
 map k <C-W>k
 map l <C-W>l
 
-"-- 改变窗口大小
+"-- change the window size
 nnoremap - <C-W>-
 nnoremap = <C-W>+
 nnoremap , <C-W><
 nnoremap . <C-W>>
 
-"-- 全选
-map a ggVG
+"-- select all
+nnoremap a ggVG
 
-"-- 保存
-map s :w<CR>
-map q :x<CR>
-imap s jj:w<CR>
-imap q jj:x<CR>
+"-- save all
+nnoremap s :w<CR>
+nnoremap q :x<CR>
+inoremap s jj:w<CR>
+inoremap q jj:x<CR>
 
-"-- 行首行尾跳转
+"-- jump to the beginning or the end of the line
 nnoremap H ^
 nnoremap L $
 
-"-- j,k重映射
-nmap j gj
-nmap k gk
+"-- j,k remapping
+nnoremap j gj
+nnoremap k gk
 
-"-- 刷新当前文件
-nmap <F5> :so %<CR>
+"-- refresh the current file
+nnoremap <F5> :so %<CR>
 
-"## 括号匹配
-set showmatch
-
-"## 禁用交换文件创建
+"## disable swap file creation
 set noswapfile
 
-"## 下方开启终端
+"## when splitting the screen vertically, it is always at the bottom
 set splitbelow
 
-"## 一键运行当前脚本
+"## run current script with one click
 map r :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
@@ -84,49 +93,53 @@ func! CompileRunGcc()
     elseif &filetype == 'python'
         exec "!time python %"
     elseif &filetype == 'html'
-        exec "!firefox % &"
+        exec "!chromium % &"
     elseif &filetype == 'go'
         exec "!time go run %"
     elseif &filetype == 'mkd'
         exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!firefox %.html &"
+        exec "!chromium %.html &"
     endif
 endfunc
 
-"**************vim-plug插件管理******************
+
+"*********************************************************
+"**************  Vim-plug plugin management  *************
+"*********************************************************
+
 call plug#begin('~/.vim/plugged')
 
-"## 目录树
+"## Nerdtree
 Plug 'preservim/nerdtree' 
 
-"-- 开启NerdTree
+"-- open NerdTree
 map n :NERDTreeToggle<CR>
 
 
-"## 补全插件
+"## YouCompleteMe
 Plug 'Valloric/YouCompleteMe'
 
-"-- 关闭补全预览框
+"-- close the preview
 set completeopt=longest,menu
 let g:ycm_add_preview_to_completeopt=0
 
 
-"## Go用
+"## for Go
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode'
 
 "## Tabgar
 Plug 'majutsushi/tagbar'
 
-"-- 开启Tagbar
+"-- open Tagbar
 map t :TagbarToggle<CR>
 
 
-"## 对齐插件
+"## Tabular 
 Plug 'godlygeek/tabular'
 
 
-"## 代码检查
+"## Ale
 Plug 'dense-analysis/ale'
 let g:ale_fix_on_save = 1
 let g:ale_completion_enable = 1
@@ -138,11 +151,11 @@ let g:airline#extensions#ale#enabled = 1
 
 "## Markdown
 
-"-- Markdown 语法高亮
+"-- Markdown Syntax highlighting
 Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled = 1
 
-"-- Markdown 实时预览
+"-- Markdown real-time preview 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 "-- config Markdown actions
@@ -150,13 +163,13 @@ let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_browser = 'chromium'
 
-"-- 快捷键
+"-- Markdown hot key
 source ~/.vim/Markdown-snippits.vim
 
-nmap p :MarkdownPreview<CR>
+nnoremap p :MarkdownPreview<CR>
 
 
-"## airline
+"## Airline
 
 "-- airline
 Plug 'bling/vim-airline'
@@ -172,7 +185,7 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme="solarized"
 
 
-"## 括号匹配
+"## DelimitMate
 Plug 'Raimondi/delimitMate'
 call plug#end()
 "************************************************”
