@@ -54,8 +54,8 @@ nnoremap a ggVG
 "-- save all
 nnoremap s :w<CR>
 nnoremap q :x<CR>
-inoremap s jj:w<CR>
-inoremap q jj:x<CR>
+inoremap s <Esc>:w<CR>
+inoremap q <Esc>:x<CR>
 
 "-- jump to the beginning or the end of the line
 nnoremap H ^
@@ -116,13 +116,24 @@ Plug 'preservim/nerdtree'
 map n :NERDTreeToggle<CR>
 
 
-"## YouCompleteMe
-Plug 'Valloric/YouCompleteMe'
+"## coc.nvim
+Plug 'neoclide/coc.nvim',{'branch': 'release'}
 
-"-- close the preview
-set completeopt=longest,menu
-let g:ycm_add_preview_to_completeopt=0
+"-- coc.nvim settings
+set nobackup
+set nowritebackup
 
+"Use tab fo trigger completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 "## for Go
 Plug 'fatih/vim-go'
@@ -137,16 +148,6 @@ map t :TagbarToggle<CR>
 
 "## Tabular 
 Plug 'godlygeek/tabular'
-
-
-"## Ale
-Plug 'dense-analysis/ale'
-let g:ale_fix_on_save = 1
-let g:ale_completion_enable = 1
-let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
-"let g:ale_linters = {'python':['pylint']}
-
 
 
 "## Markdown
@@ -166,6 +167,7 @@ let g:mkdp_browser = 'chromium'
 "-- Markdown hot key
 source ~/.vim/Markdown-snippits.vim
 
+"-- open the Preview with hot key
 nnoremap p :MarkdownPreview<CR>
 
 
@@ -187,5 +189,10 @@ let g:airline_theme="solarized"
 
 "## DelimitMate
 Plug 'Raimondi/delimitMate'
+
+"## Ale
+Plug 'dense-analysis/ale' 
+let g:ale_fix_on_save=1
+let g:airline#extensions#ale#enabled=1
 call plug#end()
 "************************************************”
