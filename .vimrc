@@ -146,14 +146,14 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme="solarized"
 
 
-" 3# ale
+" 2# ale
 Plug 'dense-analysis/ale' 
 let g:ale_fix_on_save=1
 let g:airline#extensions#ale#enabled=1
 let b:ale_linters = {'python': ['flake8', 'pylint']}
 
 
-" 4# coc.nvim
+" 3# coc.nvim
 Plug 'neoclide/coc.nvim',{'branch': 'release'}
 
 "-- coc.nvim settings
