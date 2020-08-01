@@ -107,33 +107,53 @@ endfunc
 "**************  Vim-plug plugin management  *************
 "*********************************************************
 "
-"## plugin list:
+" Use vim-plug to manage my vim's extensions
 "
-"   * Nerdtree              1
-"   * coc.nvim              2
-"   * vim-go                3
-"   * gocode                4
-"   * tabular               5
-"   * tagbar                6
-"   * ale                   7
-"   * vim-airline           8
-"   * vim-airline-themes    9
-"   * delimitMate           10
-"   * vim-markdown          11
-"   * markdown-preview      12
+" -----   plugin list   -----
+"
+"   * airline               1
+"     airline-themes        
+"   * ale                   2
+"   * coc.nvim              3
+"   * delimitMate           4
+"   * go                    5
+"     gocode                
+"   * latex                 6 
+"   * markdown              7
+"     markdown-preview       
+"   * nerdtree              8
+"   * tabular               9
+"   * tagbar                10
 "
 "********************************************************* 
 
 call plug#begin('~/.vim/plugged')
 
-"## Nerdtree
-Plug 'preservim/nerdtree' 
 
-"-- open NerdTree
-map n :NERDTreeToggle<CR>
+" 1# airline
+
+"-- airline
+Plug 'bling/vim-airline'
+
+"-- config airline
+" open the tabline
+let g:airline#extensions#tabline#enabled = 1
+
+"-- airline-themes
+Plug 'vim-airline/vim-airline-themes'
+
+"-- config airline-themes
+let g:airline_theme="solarized"
 
 
-"## coc.nvim
+" 3# ale
+Plug 'dense-analysis/ale' 
+let g:ale_fix_on_save=1
+let g:airline#extensions#ale#enabled=1
+let b:ale_linters = {'python': ['flake8', 'pylint']}
+
+
+" 4# coc.nvim
 Plug 'neoclide/coc.nvim',{'branch': 'release'}
 
 "-- coc.nvim settings
@@ -153,23 +173,20 @@ function! s:check_back_space() abort
 endfunction
 
 
-"## for Go
+" 4# delimitMate
+Plug 'Raimondi/delimitMate'
+
+
+" 5# for Go
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode'
 
 
-"## Tabgar
-Plug 'majutsushi/tagbar'
-
-"-- open Tagbar
-map t :TagbarToggle<CR>
+" 6# latex
+Plug 'lervag/vimtex'
 
 
-"## Tabular 
-Plug 'godlygeek/tabular'
-
-
-"## Markdown
+" 7# markdown
 
 "-- Markdown Syntax highlighting
 Plug 'plasticboy/vim-markdown'
@@ -190,31 +207,23 @@ source ~/.vim/Markdown-snippits.vim
 nnoremap p :MarkdownPreview<CR>
 
 
-"## Airline
+" 8# nerdtree
+Plug 'preservim/nerdtree' 
 
-"-- airline
-Plug 'bling/vim-airline'
-
-"-- config airline
-" open the tabline
-let g:airline#extensions#tabline#enabled = 1
-
-"-- airline-themes
-Plug 'vim-airline/vim-airline-themes'
-
-"-- config airline-themes
-let g:airline_theme="solarized"
+"-- open NerdTree
+map n :NERDTreeToggle<CR>
 
 
-"## DelimitMate
-Plug 'Raimondi/delimitMate'
+" 9# tabular 
+Plug 'godlygeek/tabular'
 
 
-"## Ale
-Plug 'dense-analysis/ale' 
-let g:ale_fix_on_save=1
-let g:airline#extensions#ale#enabled=1
-let b:ale_linters = {'python': ['flake8', 'pylint']}
+" 10# tabgar
+Plug 'majutsushi/tagbar'
+
+"-- open Tagbar
+map t :TagbarToggle<CR>
+
 
 call plug#end()
 "************************************************”
