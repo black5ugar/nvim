@@ -106,6 +106,23 @@ endfunc
 "*********************************************************
 "**************  Vim-plug plugin management  *************
 "*********************************************************
+"
+"## plugin list:
+"
+"   * Nerdtree              1
+"   * coc.nvim              2
+"   * vim-go                3
+"   * gocode                4
+"   * tabular               5
+"   * tagbar                6
+"   * ale                   7
+"   * vim-airline           8
+"   * vim-airline-themes    9
+"   * delimitMate           10
+"   * vim-markdown          11
+"   * markdown-preview      12
+"
+"********************************************************* 
 
 call plug#begin('~/.vim/plugged')
 
@@ -135,9 +152,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+
 "## for Go
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode'
+
 
 "## Tabgar
 Plug 'majutsushi/tagbar'
@@ -190,9 +209,12 @@ let g:airline_theme="solarized"
 "## DelimitMate
 Plug 'Raimondi/delimitMate'
 
+
 "## Ale
 Plug 'dense-analysis/ale' 
 let g:ale_fix_on_save=1
 let g:airline#extensions#ale#enabled=1
+let b:ale_linters = {'python': ['flake8', 'pylint']}
+
 call plug#end()
 "************************************************”
