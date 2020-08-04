@@ -68,6 +68,13 @@ nnoremap k gk
 "-- refresh the current file
 nnoremap <F5> :so %<CR>
 
+"-- change the buffer
+noremap gb :bp<CR>
+noremap gn :bn<CR>
+
+"-- for the snippets of different file types
+source ~/.vim/ftplugin/Java-snippets.vim 
+
 "## disable swap file creation
 set noswapfile
 
@@ -122,6 +129,7 @@ endfunc
 "   * markdown              7
 "     markdown-preview       
 "   * nerdtree              8
+"     nerdtree-tabs
 "   * tabular               9
 "   * tagbar                10
 "
@@ -160,7 +168,7 @@ Plug 'neoclide/coc.nvim',{'branch': 'release'}
 set nobackup
 set nowritebackup
 
-"Use tab fo trigger completion
+"Use <Tab> for trigger completion
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -201,7 +209,7 @@ let g:mkdp_auto_close = 0
 let g:mkdp_browser = 'chromium'
 
 "-- Markdown hot key
-source ~/.vim/Markdown-snippits.vim
+source ~/.vim/ftplugin/Markdown-snippets.vim
 
 "-- open the Preview with hot key
 nnoremap p :MarkdownPreview<CR>
@@ -209,6 +217,7 @@ nnoremap p :MarkdownPreview<CR>
 
 " 8# nerdtree
 Plug 'preservim/nerdtree' 
+Plug 'jistr/vim-nerdtree-tabs'
 
 "-- open NerdTree
 map n :NERDTreeToggle<CR>
