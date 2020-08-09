@@ -33,7 +33,7 @@ set encoding=utf-8
 
 "## key mapping
 
-"-- <Esc> key mapping
+"-- jj to <Esc>
 inoremap jj <Esc>
 
 "-- window switch
@@ -72,8 +72,14 @@ nnoremap <F5> :so %<CR>
 noremap gb :bp<CR>
 noremap gn :bn<CR>
 
+"-- out of brackets
+inoremap f <Esc>%% 
+
 "-- for the snippets of different file types
 source ~/.vim/ftplugin/Java-snippets.vim 
+source ~/.vim/ftplugin/Go-snippets.vim
+source ~/.vim/ftplugin/Markdown-snippets.vim
+source ~/.vim/ftplugin/Python-snippets.vim
 
 "## disable swap file creation
 set noswapfile
@@ -158,7 +164,7 @@ let g:airline_theme="solarized"
 Plug 'dense-analysis/ale' 
 let g:ale_fix_on_save=1
 let g:airline#extensions#ale#enabled=1
-let b:ale_linters = {'python': ['flake8', 'pylint']}
+let b:ale_linters = {'python': ['flake8']}
 
 
 " 3# coc.nvim
@@ -167,6 +173,7 @@ Plug 'neoclide/coc.nvim',{'branch': 'release'}
 "-- coc.nvim settings
 set nobackup
 set nowritebackup
+set cmdheight=1
 
 "Use <Tab> for trigger completion
 inoremap <silent><expr> <TAB>
@@ -191,7 +198,7 @@ Plug 'nsf/gocode'
 
 
 " 6# latex
-Plug 'lervag/vimtex'
+"Plug 'lervag/vimtex'
 
 
 " 7# markdown
@@ -208,10 +215,7 @@ let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_browser = 'chromium'
 
-"-- Markdown hot key
-source ~/.vim/ftplugin/Markdown-snippets.vim
-
-"-- open the Preview with hot key
+"-- open the Preview with shortcut
 nnoremap p :MarkdownPreview<CR>
 
 
