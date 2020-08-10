@@ -1,1 +1,1 @@
-autocmd FileType java inoremap syo System.out.println();<Esc>hi
+autocmd FileType java inoremap sout System.out.println();<Esc>hi
