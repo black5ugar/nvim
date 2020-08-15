@@ -127,18 +127,20 @@ endfunc
 "
 "   * airline               1
 "     airline-themes        
-"   * coc.nvim              2
-"   * css-color             3
-"   * delimitMate           4
-"   * go                    5
+"   * ale                   2
+"   * coc.nvim              3
+"   * css-color             4
+"   * delimitMate           5
+"   * go                    6
 "     gocode                
-"   * latex                 6 
-"   * markdown              7
+"   * latex                 7 
+"   * markdown              8
 "     markdown-preview       
-"   * nerdtree              8
+"   * nerdtree              9
 "     nerdtree-tabs
-"   * tabular               9
-"   * tagbar                10
+"   * tabular               10
+"   * tagbar                11
+"   * youcompletme          12
 "
 "********************************************************* 
 
@@ -158,10 +160,16 @@ let g:airline#extensions#tabline#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
 
 "-- config airline-themes
-let g:airline_theme="solarized"
+let g:airline_theme="sierra"
 
 
-" 2# coc.nvim
+" 2# ale
+Plug 'dense-analysis/ale'
+let g:ale_fix_on_save=1
+let g:airline#extensions#ale#enabled=1
+let b:ale_linters = {'python': ['flake8']}
+
+" 3# coc.nvim
 Plug 'neoclide/coc.nvim',{'branch': 'release'}
 
 "-- coc.nvim settings
@@ -169,7 +177,6 @@ set nobackup
 set nowritebackup
 set cmdheight=1
 
-"Use <Tab> for trigger completion
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -182,24 +189,24 @@ function! s:check_back_space() abort
 endfunction
 
 
-" 3# css-color
+" 4# css-color
 Plug 'ap/vim-css-color'
 
 
-" 4# delimitMate
+" 5# delimitMate
 Plug 'Raimondi/delimitMate'
 
 
-" 5# for Go
+" 6# for Go
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode'
 
 
-" 6# latex
+" 7# latex
 "Plug 'lervag/vimtex'
 
 
-" 7# markdown
+" 8# markdown
 
 "-- Markdown Syntax highlighting
 Plug 'plasticboy/vim-markdown'
@@ -217,7 +224,7 @@ let g:mkdp_browser = 'chromium'
 nnoremap <A-p> :MarkdownPreview<CR>
 
 
-" 8# nerdtree
+" 9# nerdtree
 Plug 'preservim/nerdtree' 
 Plug 'jistr/vim-nerdtree-tabs'
 
@@ -225,16 +232,18 @@ Plug 'jistr/vim-nerdtree-tabs'
 map <A-n> :NERDTreeToggle<CR>
 
 
-" 9# tabular 
+" 10# tabular 
 Plug 'godlygeek/tabular'
 
 
-" 10# tabgar
+" 11# tabgar
 Plug 'majutsushi/tagbar'
 
 "-- open Tagbar
 map <A-t> :TagbarToggle<CR>
 
 
+" 12# youcompletme
+"Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 "************************************************”
