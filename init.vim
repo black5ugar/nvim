@@ -75,6 +75,9 @@ noremap gn :bn<CR>
 "-- out of brackets
 inoremap <A-f> <Esc>%% 
 
+"-- nohighlight
+nnoremap <Esc> :noh<Esc><CR>
+
 "-- for the snippets of different file types
 source ~/.config/nvim/ftplugin/Java-snippets.vim 
 source ~/.config/nvim/ftplugin/Go-snippets.vim
@@ -160,7 +163,7 @@ let g:airline#extensions#tabline#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
 
 "-- config airline-themes
-let g:airline_theme="sierra"
+let g:airline_theme="fruit_punch"
 
 
 " 2# ale
