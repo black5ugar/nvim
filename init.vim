@@ -60,6 +60,8 @@ inoremap <A-q> <Esc>:x<CR>
 "-- jump to the beginning or the end of the line
 nnoremap H ^
 nnoremap L $
+nnoremap dH d^
+nnoremap dL d$
 
 "-- j,k remapping
 nnoremap j gj
