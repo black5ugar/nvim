@@ -20,6 +20,9 @@ set showmatch
 "## scrolloff
 set scrolloff=5
 
+"## highlight the line
+"set cul
+
 
 "*********************************************************
 "***************    Function settings   ******************
@@ -93,7 +96,7 @@ set noswapfile
 "## when splitting the screen vertically, it is always at the bottom
 set splitbelow
 
-"## run current script with one click
+"## run current script with shortcut
 map <A-r> :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
