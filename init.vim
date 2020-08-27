@@ -28,6 +28,9 @@ set scrolloff=5
 "***************    Function settings   ******************
 "*********************************************************
 
+"## use mouse
+"set mouse=a
+
 "## do not compatible with vi
 set nocompatible
 
@@ -65,6 +68,10 @@ nnoremap H ^
 nnoremap L $
 nnoremap dH d^
 nnoremap dL d$
+nnoremap cH c^
+nnoremap cL c$
+vnoremap vL v^
+vnoremap vH v$
 
 "-- j,k remapping
 nnoremap j gj
@@ -78,7 +85,7 @@ noremap gb :bp<CR>
 noremap gn :bn<CR>
 
 "-- out of brackets
-inoremap <A-f> <Esc>%% 
+"inoremap <A-f> <Esc>%% 
 
 "-- nohighlight
 nnoremap <Esc> :noh<Esc><CR>
@@ -183,7 +190,6 @@ Plug 'neoclide/coc.nvim',{'branch': 'release'}
 "-- coc.nvim settings
 set nobackup
 set nowritebackup
-set cmdheight=1
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
