@@ -70,8 +70,8 @@ nnoremap dH d^
 nnoremap dL d$
 nnoremap cH c^
 nnoremap cL c$
-vnoremap vL v^
-vnoremap vH v$
+vnoremap H ^
+vnoremap L $
 
 "-- j,k remapping
 nnoremap j gj
@@ -179,10 +179,10 @@ let g:airline_theme="fruit_punch"
 
 
 " 2# ale
-Plug 'dense-analysis/ale'
-let g:ale_fix_on_save=1
-let g:airline#extensions#ale#enabled=1
-let b:ale_linters = {'python': ['flake8']}
+"Plug 'dense-analysis/ale'
+"let g:ale_fix_on_save=1
+"let g:airline#extensions#ale#enabled=1
+"let b:ale_linters = {'python': ['flake8']}
 
 " 3# coc.nvim
 Plug 'neoclide/coc.nvim',{'branch': 'release'}
