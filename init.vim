@@ -90,6 +90,10 @@ noremap gn :bn<CR>
 "-- nohighlight
 nnoremap <Esc> :noh<Esc><CR>
 
+"-- Open the file in binary form
+:command B %!xxd 
+:command BB %!xxd -r
+
 "-- for the snippets of different file types
 source ~/.config/nvim/ftplugin/Java-snippets.vim 
 source ~/.config/nvim/ftplugin/Go-snippets.vim
