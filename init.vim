@@ -8,6 +8,9 @@
 "**************    Display settings     ******************
 "*********************************************************
 
+"## color theme
+"colorscheme blue
+
 "## line number & relative line number
 set nu
 set relativenumber
@@ -39,6 +42,9 @@ set scrolloff=5
 
 "## do not compatible with vi
 set nocompatible
+
+"## set the connection to the system clipboard
+set clipboard+=unnamedplus
 
 "## set encoding
 set encoding=utf-8
