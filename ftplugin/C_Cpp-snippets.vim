@@ -1,6 +1,6 @@
 " add the comment
 auto FileType c vnoremap <leader>c I//<Space><Esc>
-auto FileType cpp vnoremap <leader> I//<Space><Esc>
+auto FileType cpp vnoremap <leader>c I//<Space><Esc>
 
 " remove the comment
 auto FileType c vnoremap <leader>d 2lx
