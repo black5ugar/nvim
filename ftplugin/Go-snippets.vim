@@ -6,3 +6,6 @@ autocmd FileType go vnoremap <leader>c I//<Space><Esc>
 
 " remove the comment
 autocmd FileType go vnoremap <leader>d 2lx
+
+" go test files
+autocmd FileType go cnoremap got !go<Space>test<Space>-v<Space>%
