@@ -24,7 +24,7 @@ set expandtab
 set shiftwidth=4
 
 "## bracket matching
-set showmatch
+"set showmatch
 
 "## scrolloff
 set scrolloff=5
@@ -112,6 +112,7 @@ source ~/.config/nvim/ftplugin/Go-snippets.vim
 source ~/.config/nvim/ftplugin/Markdown-snippets.vim
 source ~/.config/nvim/ftplugin/Python-snippets.vim
 source ~/.config/nvim/ftplugin/Shell-snippets.vim
+source ~/.config/nvim/ftplugin/C_Cpp-snippets.vim
 
 "## disable swap file creation
 set noswapfile
@@ -172,6 +173,7 @@ endfunc
 "   * tabular               10
 "   * tagbar                11
 "   * youcompletme          12
+"   * fzf                   13
 "
 "********************************************************* 
 
@@ -200,6 +202,7 @@ let g:airline_theme="fruit_punch"
 "let g:airline#extensions#ale#enabled=1
 "let b:ale_linters = {'python': ['flake8']}
 
+
 " 3# coc.nvim
 Plug 'neoclide/coc.nvim',{'branch': 'release'}
 
@@ -207,6 +210,7 @@ Plug 'neoclide/coc.nvim',{'branch': 'release'}
 set nobackup
 set nowritebackup
 
+"-- Use tab for trigger completion with characters ahead and navigation
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -217,6 +221,27 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+
+"-- Use [g and ]g to navigate diagnostics
+"-- Use 'CocDiagnostics' to get all diagnostics of current buffer in location list
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
+
+"-- Go to code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+"-- Symbol renaming
+nmap <leader>r <Plug>(coc-rename)
+
+"-- Apply AutoFix to problem on the current line.
+nmap <leader>f <Plug>(coc-fix-current)
+
+"-- Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
 " 4# css-color
@@ -276,4 +301,11 @@ map <A-t> :TagbarToggle<CR>
 " 12# youcompletme
 "Plug 'ycm-core/YouCompleteMe'
 call plug#end()
+
+
+" 13# fzf
+Plug 'junegunn/fzf', {'do': { -> fzf#install()}}
+Plug 'junegunn/fzf.vim'
+
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 "************************************************”
