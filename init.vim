@@ -106,6 +106,9 @@ nnoremap <Esc> :noh<Esc><CR>
 :command B %!xxd 
 :command BB %!xxd -r
 
+"-- Open the terminal
+command! -nargs=* T split | resize 10 | terminal <args>
+
 "-- for the snippets of different file types
 source ~/.config/nvim/ftplugin/Java-snippets.vim 
 source ~/.config/nvim/ftplugin/Go-snippets.vim
