@@ -8,6 +8,11 @@
 "**************    Display settings     ******************
 "*********************************************************
 
+"## encoding
+set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
+set enc=utf8
+set fencs=utf8,gbk,gb2312,gb18030
+
 "## color theme
 "colorscheme blue
 
@@ -87,7 +92,9 @@ vnoremap L $
 
 "-- j,k remapping
 nnoremap j gj
+vnoremap j gj
 nnoremap k gk
+vnoremap k gk
 
 "-- refresh the current file
 nnoremap <F5> :so %<CR>
@@ -256,8 +263,8 @@ Plug 'Raimondi/delimitMate'
 
 
 " 6# for Go
-Plug 'fatih/vim-go'
-Plug 'nsf/gocode'
+"Plug 'fatih/vim-go'
+"Plug 'nsf/gocode'
 
 
 " 7# latex
@@ -271,7 +278,7 @@ Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled = 1
 
 "-- Markdown real-time preview 
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 "-- config Markdown actions
 let g:mkdp_auto_start = 0
@@ -303,12 +310,12 @@ map <A-t> :TagbarToggle<CR>
 
 " 12# youcompletme
 "Plug 'ycm-core/YouCompleteMe'
-call plug#end()
-
 
 " 13# fzf
 Plug 'junegunn/fzf', {'do': { -> fzf#install()}}
 Plug 'junegunn/fzf.vim'
 
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+call plug#end()
 "************************************************”
