@@ -122,42 +122,14 @@ source ~/.config/nvim/ftplugin/Python-snippets.vim
 source ~/.config/nvim/ftplugin/Shell-snippets.vim
 source ~/.config/nvim/ftplugin/C_Cpp-snippets.vim
 
+"-- some function
+source ~/.config/nvim/ftplugin/Function.vim
+
 "## disable swap file creation
 set noswapfile
 
 "## when splitting the screen vertically, it is always at the bottom
 set splitbelow
-
-"## run current script with shortcut
-map <A-r> :call CompileRunGcc()<CR>
-
-func! CompileRunGcc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'java' 
-        exec "!javac %" 
-        exec "!time java %<"
-    elseif &filetype == 'sh'
-        :!time bash %
-    elseif &filetype == 'python'
-        exec "!time python %"
-    elseif &filetype == 'html'
-        exec "!chromium % &"
-    elseif &filetype == 'go'
-        exec "!time go run %"
-    elseif &filetype == 'cuda'
-        exec "!nvcc % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'mkd'
-        exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!chromium %.html &"
-    endif
-endfunc
 
 
 "*********************************************************
