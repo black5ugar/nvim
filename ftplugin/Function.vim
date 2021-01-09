@@ -23,8 +23,5 @@ func! CompileRunGcc()
     elseif &filetype == 'cuda'
         exec "!nvcc % -o %<"
         exec "!time ./%<"
-    elseif &filetype == 'mkd'
-        exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!chromium %.html &"
-    endif
+   endif
 endfunc
