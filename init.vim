@@ -56,8 +56,6 @@ set encoding=utf-8
 
 "## key mapping
 
-"-- jj to <Esc>
-inoremap jj <Esc>
 
 "-- window switch
 map <A-h> <C-W>h
@@ -152,6 +150,9 @@ func! CompileRunGcc()
         exec "!chromium % &"
     elseif &filetype == 'go'
         exec "!time go run %"
+    elseif &filetype == 'cuda'
+        exec "!nvcc % -o %<"
+        exec "!time ./%<"
     elseif &filetype == 'mkd'
         exec "!~/.vim/markdown.pl % > %.html &"
         exec "!chromium %.html &"
