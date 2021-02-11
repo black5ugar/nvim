@@ -23,7 +23,7 @@ set relativenumber
 "## display the current position of the cursor
 set ruler
 
-"## set <Tab> to for spaces
+"## set <Tab> to four spaces
 set ts=4
 set expandtab
 set shiftwidth=4
@@ -55,7 +55,6 @@ set clipboard+=unnamedplus
 set encoding=utf-8
 
 "## key mapping
-
 
 "-- window switch
 map <A-h> <C-W>h
@@ -256,7 +255,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 "-- config Markdown actions
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
-let g:mkdp_browser = 'chromium'
+let g:mkdp_browser = 'firefox'
 
 "-- open the Preview with shortcut
 nnoremap <A-p> :MarkdownPreview<CR>
