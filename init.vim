@@ -152,10 +152,11 @@ set splitbelow
 "     markdown-preview       
 "   * nerdtree              9
 "     nerdtree-tabs
-"   * tabular               10
-"   * tagbar                11
-"   * youcompletme          12
-"   * fzf                   13
+"   * nerdcommenter         10
+"   * tabular               11
+"   * tagbar                12
+"   * youcompletme          13
+"   * fzf                   14
 "
 "********************************************************* 
 
@@ -269,21 +270,52 @@ Plug 'jistr/vim-nerdtree-tabs'
 map <A-n> :NERDTreeToggle<CR>
 
 
-" 10# tabular 
+" 10# nerdcommenter
+Plug 'preservim/nerdcommenter'
+
+"-- Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+"-- Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+"-- Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+"-- Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+"-- Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+"-- Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+"-- Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+"-- Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+"-- Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+
+" 11# tabular 
 Plug 'godlygeek/tabular'
 
 
-" 11# tabgar
+" 12# tabgar
 Plug 'majutsushi/tagbar'
 
 "-- open Tagbar
 map <A-t> :TagbarToggle<CR>
 
 
-" 12# youcompletme
+" 13# youcompletme
 "Plug 'ycm-core/YouCompleteMe'
 
-" 13# fzf
+" 14# fzf
 Plug 'junegunn/fzf', {'do': { -> fzf#install()}}
 Plug 'junegunn/fzf.vim'
 
