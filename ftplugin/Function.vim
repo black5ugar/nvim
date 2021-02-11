@@ -4,10 +4,10 @@ map <A-r> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
-        exec "!g++ % -o %<"
+        exec "!clang % -o %<"
         exec "!time ./%<"
     elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
+        exec "!clang++ % -o %<"
         exec "!time ./%<"
     elseif &filetype == 'java' 
         exec "!javac %" 
