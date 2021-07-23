@@ -1,6 +1,6 @@
 "---------------------------------------------------------
 "---------- this is my neovim config settings ------------
-"----------        create by: black5ugar      ------------
+"----------       created by: black5ugar      ------------
 "---------------------------------------------------------
 
 
@@ -10,8 +10,8 @@
 
 "## encoding
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
-set enc=utf8
-set fencs=utf8,gbk,gb2312,gb18030
+set enc=utf-8
+set fencs=utf-8,gbk,gb2312,gb18030
 
 "## color theme
 "colorscheme blue
@@ -256,7 +256,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 "-- config Markdown actions
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
-let g:mkdp_browser = 'firefox'
+let g:mkdp_browser = 'chromium'
 
 "-- open the Preview with shortcut
 nnoremap <A-p> :MarkdownPreview<CR>
