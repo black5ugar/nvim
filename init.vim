@@ -146,12 +146,12 @@ set splitbelow
 "   * css-color             4
 "   * delimitMate           5
 "   * go                    6
-"     gocode                
 "   * latex                 7 
 "   * markdown              8
 "     markdown-preview       
 "   * nerdtree              9
 "     nerdtree-tabs
+"     vim-devicons
 "   * nerdcommenter         10
 "   * tabular               11
 "   * tagbar                12
@@ -236,8 +236,7 @@ Plug 'Raimondi/delimitMate'
 
 
 " 6# for Go
-"Plug 'fatih/vim-go'
-"Plug 'nsf/gocode'
+Plug 'fatih/vim-go'
 
 
 " 7# latex
@@ -265,6 +264,7 @@ nnoremap <A-p> :MarkdownPreview<CR>
 " 9# nerdtree
 Plug 'preservim/nerdtree' 
 Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'ryanoasis/vim-devicons'
 
 "-- open NerdTree
 map <A-n> :NERDTreeToggle<CR>
