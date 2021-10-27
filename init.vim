@@ -146,12 +146,12 @@ set splitbelow
 "   * css-color             4
 "   * delimitMate           5
 "   * go                    6
+"     gocode                
 "   * latex                 7 
 "   * markdown              8
 "     markdown-preview       
 "   * nerdtree              9
 "     nerdtree-tabs
-"     vim-devicons
 "   * nerdcommenter         10
 "   * tabular               11
 "   * tagbar                12
@@ -233,10 +233,12 @@ Plug 'ap/vim-css-color'
 
 " 5# delimitMate
 Plug 'Raimondi/delimitMate'
+let delimitMate_expand_cr = 1
 
 
 " 6# for Go
 Plug 'fatih/vim-go'
+"Plug 'nsf/gocode'
 
 
 " 7# latex
@@ -264,7 +266,6 @@ nnoremap <A-p> :MarkdownPreview<CR>
 " 9# nerdtree
 Plug 'preservim/nerdtree' 
 Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'ryanoasis/vim-devicons'
 
 "-- open NerdTree
 map <A-n> :NERDTreeToggle<CR>
@@ -318,6 +319,9 @@ map <A-t> :TagbarToggle<CR>
 " 14# fzf
 Plug 'junegunn/fzf', {'do': { -> fzf#install()}}
 Plug 'junegunn/fzf.vim'
+
+" 15# ici
+Plug 'Flowerowl/ici.vim'
 
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
