@@ -146,17 +146,18 @@ set splitbelow
 "   * css-color             4
 "   * delimitMate           5
 "   * go                    6
-"     gocode                
 "   * latex                 7 
 "   * markdown              8
 "     markdown-preview       
 "   * nerdtree              9
 "     nerdtree-tabs
+"     vim-devicons
 "   * nerdcommenter         10
 "   * tabular               11
 "   * tagbar                12
 "   * youcompletme          13
 "   * fzf                   14
+"   * vim-fugitive          15
 "
 "********************************************************* 
 
@@ -195,12 +196,18 @@ set nowritebackup
 
 "-- Use tab for trigger completion with characters ahead and navigation
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -233,12 +240,11 @@ Plug 'ap/vim-css-color'
 
 " 5# delimitMate
 Plug 'Raimondi/delimitMate'
-let delimitMate_expand_cr = 1
+let delimitMate_expand_cr=1
 
 
 " 6# for Go
 Plug 'fatih/vim-go'
-"Plug 'nsf/gocode'
 
 
 " 7# latex
@@ -266,6 +272,7 @@ nnoremap <A-p> :MarkdownPreview<CR>
 " 9# nerdtree
 Plug 'preservim/nerdtree' 
 Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'ryanoasis/vim-devicons'
 
 "-- open NerdTree
 map <A-n> :NERDTreeToggle<CR>
@@ -320,10 +327,13 @@ map <A-t> :TagbarToggle<CR>
 Plug 'junegunn/fzf', {'do': { -> fzf#install()}}
 Plug 'junegunn/fzf.vim'
 
-" 15# ici
-Plug 'Flowerowl/ici.vim'
-
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+"-- search files
+nnoremap [f :Files<CR>
+
+" 15#vim-fugitive
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 "************************************************”
