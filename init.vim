@@ -14,7 +14,8 @@ set enc=utf-8
 set fencs=utf-8,gbk,gb2312,gb18030
 
 "## color theme
-"colorscheme blue
+colorscheme habamax
+set termguicolors
 
 "## line number & relative line number
 set nu
@@ -120,6 +121,7 @@ source ~/.config/nvim/ftplugin/Markdown-snippets.vim
 source ~/.config/nvim/ftplugin/Python-snippets.vim
 source ~/.config/nvim/ftplugin/Shell-snippets.vim
 source ~/.config/nvim/ftplugin/C_Cpp-snippets.vim
+source ~/.config/nvim/ftplugin/Latex-snippets.vim
 
 "-- some function
 source ~/.config/nvim/ftplugin/Function.vim
@@ -158,6 +160,7 @@ set splitbelow
 "   * youcompletme          13
 "   * fzf                   14
 "   * vim-fugitive          15
+"   * twilight.nvim         16
 "
 "********************************************************* 
 
@@ -334,6 +337,14 @@ nnoremap [f :Files<CR>
 
 " 15#vim-fugitive
 Plug 'tpope/vim-fugitive'
+
+" 16#folke/tokyonight.nvim
+Plug 'navarasu/onedark.nvim'
+
+" 17#'lervag/vimtex'
+Plug 'lervag/vimtex'
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_method = 'latexmk'
 
 call plug#end()
 "************************************************”
