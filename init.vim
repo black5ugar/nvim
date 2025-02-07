@@ -346,6 +346,7 @@ Plug 'lervag/vimtex'
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_method = 'latexmk'
 
+
 " 18#coqtail
 Plug 'whonore/Coqtail'
 map <leader>ss <Plug>CoqStart
@@ -357,5 +358,6 @@ function CoqtailHookDefineMappings()
   nmap <buffer> <S-Left> <Plug>CoqToLine
   nmap <buffer> <S-Up> <Plug>CoqUndo
 endfunction
+
 call plug#end()
 "************************************************”
