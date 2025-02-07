@@ -1,4 +1,3 @@
-" run current script whit shortcut
 map <A-r> :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
@@ -8,6 +7,10 @@ func! CompileRunGcc()
         exec "!time ./%<"
     elseif &filetype == 'cpp'
         exec "!clang++ % -o %<"
+        exec "!time ./%<"
+    " 重点修改这里：Rust 的编译命令
+    elseif &filetype == 'rs'
+        exec "!rustc % -o %<"
         exec "!time ./%<"
     elseif &filetype == 'java' 
         exec "!javac %" 

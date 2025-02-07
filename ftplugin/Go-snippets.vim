@@ -2,6 +2,10 @@ autocmd FileType go inoremap fpn fmt.Println()<Esc>i
 autocmd FileType go inoremap fpf fmt.Printf()<Esc>i
 autocmd FileType go inoremap fpt fmt.Print()<Esc>i
 
+autocmd FileType go inoremap lpn log.Println()<Esc>i
+autocmd FileType go inoremap lpf log.Printf()<Esc>i
+autocmd FileType go inoremap lpt log.Print()<Esc>i
+
 " debug golang 
 autocmd FileType go nnoremap <leader>b :GoDebugBreakpoint<CR>
 autocmd FileType go nnoremap <leader>n :GoDebugContinue<CR>
