@@ -346,16 +346,79 @@ Plug 'lervag/vimtex'
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_method = 'latexmk'
 
-" 18#coqtail
-Plug 'whonore/Coqtail'
-map <leader>ss <Plug>CoqStart
-function CoqtailHookDefineMappings()
-  imap <buffer> <S-Down> <Plug>CoqNext
-  imap <buffer> <S-Left> <Plug>CoqToLine
-  imap <buffer> <S-Up> <Plug>CoqUndo
-  nmap <buffer> <S-Down> <Plug>CoqNext
-  nmap <buffer> <S-Left> <Plug>CoqToLine
-  nmap <buffer> <S-Up> <Plug>CoqUndo
-endfunction
+" 18#nvim-dap
+Plug 'mfussenegger/nvim-dap'
+
+
+" vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+" vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+" vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+" vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+" vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+" vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+" vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+" vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+" vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+
 call plug#end()
 "************************************************”
+
+" lua scripts
+" nvim-dap
+"
+
+lua << EOF
+-- ~/.config/nvim/init.lua
+
+-- 加载 dap 模块
+local dap = require('dap')
+local widgets = require('dap.ui.widgets')
+
+-- 配置 Python 调试器
+dap.adapters.python = {
+  type = 'executable',
+  command = 'python',  -- 如果使用虚拟环境，改为虚拟环境的 Python 路径（如 'venv/bin/python'）
+  args = { '-m', 'debugpy.adapter' },
+}
+
+-- 定义 Python 调试配置
+dap.configurations.python = {
+  {
+    type = 'python',
+    request = 'launch',
+    name = 'Launch Current File',
+    program = '${file}',       -- 调试当前文件
+    pythonPath = function()
+      return 'python'          -- 默认使用系统 Python，可改为虚拟环境路径（如 'venv/bin/python'）
+    end,
+  },
+  -- 其他调试配置（如 Django、Flask）可在此添加
+}
+
+-- 设置调试快捷键
+vim.keymap.set('n', '<F5>', function() dap.continue() end)
+vim.keymap.set('n', '<F10>', function() dap.step_over() end)
+vim.keymap.set('n', '<F11>', function() dap.step_into() end)
+vim.keymap.set('n', '<F12>', function() dap.step_out() end)
+vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader>B', function() dap.set_breakpoint() end)
+vim.keymap.set('n', '<Leader>lp', function()
+  dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+end)
+vim.keymap.set('n', '<Leader>dr', function() dap.repl.open() end)
+vim.keymap.set('n', '<Leader>dl', function() dap.run_last() end)
+
+-- 可视化调试窗口
+vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+  widgets.hover()
+end)
+vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+  widgets.preview()
+end)
+vim.keymap.set('n', '<Leader>df', function()
+  widgets.centered_float(widgets.frames)
+end)
+vim.keymap.set('n', '<Leader>ds', function()
+  widgets.centered_float(widgets.scopes)
+end)
+EOF
