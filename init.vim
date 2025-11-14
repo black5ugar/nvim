@@ -335,6 +335,22 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 "-- search files
 nnoremap [f :Files<CR>
 
+"-- search keywords
+nnoremap [r :Rg<CR>
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --vimgrep --smart-case ' .
+  \   '--max-columns 200 --max-columns-preview ' .
+  \   '--max-count 2000 ' .
+  \   '--hidden ' .
+  \   '--glob "!.git/*" --glob "!node_modules/*" --glob "!dist/*" ' .
+  \   '--glob "!build/*" --glob "!.cache/*" ' .
+  \   shellescape(<q-args>),
+  \   1,
+  \   fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}),
+  \   <bang>0)
+
+
 " 15#vim-fugitive
 Plug 'tpope/vim-fugitive'
 
