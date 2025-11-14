@@ -340,11 +340,15 @@ nnoremap [r :Rg<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --vimgrep --smart-case ' .
-  \   '--max-columns 200 --max-columns-preview ' .
+  \   '--max-columns 2000 --max-columns-preview ' .
   \   '--max-count 2000 ' .
   \   '--hidden ' .
-  \   '--glob "!.git/*" --glob "!node_modules/*" --glob "!dist/*" ' .
-  \   '--glob "!build/*" --glob "!.cache/*" ' .
+  \   '--glob "!.git/*" ' .
+  \   '--glob "!node_modules/*" ' .
+  \   '--glob "!dist/*" ' .
+  \   '--glob "!build/*" ' .
+  \   '--glob "!.cache/*" ' .
+  \   '--glob "!bin/*" ' .
   \   shellescape(<q-args>),
   \   1,
   \   fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}),
