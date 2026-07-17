@@ -380,6 +380,14 @@ Plug 'mfussenegger/nvim-dap'
 " vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
 " vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
 
+
+
+" 19# CodeCompanion + Codex ACP
+" Keep this minimal: plenary is required; nvim-treesitter is not added here
+" so it will not alter the existing vim-markdown highlighting setup.
+Plug 'nvim-lua/plenary.nvim'
+Plug 'olimorris/codecompanion.nvim', { 'tag': 'v19.19.0' }
+
 call plug#end()
 "************************************************”
 
@@ -442,3 +450,86 @@ vim.keymap.set('n', '<Leader>ds', function()
   widgets.centered_float(widgets.scopes)
 end)
 EOF
+
+"*********************************************************
+"****************   Codex integration   ******************
+"*********************************************************
+"
+" This configuration deliberately avoids mappings already used by:
+" - coc.nvim: <Tab>, <S-Tab>, <CR>, gd/gy/gi/gr, [g/]g
+" - nvim-dap: F5/F10/F11/F12 and <Leader>d*/<Leader>b
+" - NERDTree/Tagbar/Markdown preview: Alt-based mappings
+"
+" mapleader is not changed. In this config it remains Vim's default: \
+"
+lua << EOF
+local ok, codecompanion = pcall(require, "codecompanion")
+if not ok then
+  vim.schedule(function()
+    vim.notify("CodeCompanion is not installed. Run :PlugInstall", vim.log.levels.WARN)
+  end)
+else
+  codecompanion.setup({
+    adapters = {
+      acp = {
+        codex = function()
+          return require("codecompanion.adapters").extend("codex", {
+            defaults = {
+              auth_method = "chatgpt",
+              timeout = 120000,
+            },
+          })
+        end,
+      },
+    },
+
+    interactions = {
+      chat = {
+        adapter = "codex",
+      },
+      cli = {
+        agent = "codex",
+        agents = {
+          codex = {
+            cmd = "codex",
+            args = {},
+            description = "OpenAI Codex CLI",
+            provider = "terminal",
+          },
+        },
+        opts = {
+          auto_insert = true,
+          reload = true,
+        },
+      },
+    },
+
+    opts = {
+      log_level = "ERROR",
+    },
+  })
+
+  local map = vim.keymap.set
+  local silent = { silent = true }
+
+  -- All Codex mappings live under <Leader>a, which is unused above.
+  map({ "n", "v" }, "<Leader>aa", "<Cmd>CodeCompanionActions<CR>",
+      vim.tbl_extend("force", silent, { desc = "Codex actions" }))
+  map("n", "<Leader>ac", "<Cmd>CodeCompanionChat Toggle<CR>",
+      vim.tbl_extend("force", silent, { desc = "Toggle Codex chat" }))
+  map("v", "<Leader>as", "<Cmd>CodeCompanionChat Add<CR>",
+      vim.tbl_extend("force", silent, { desc = "Add selection to Codex chat" }))
+  map("n", "<Leader>at", "<Cmd>CodeCompanionCLI<CR>",
+      vim.tbl_extend("force", silent, { desc = "Open Codex terminal" }))
+  map({ "n", "v" }, "<Leader>ap", function()
+    require("codecompanion").cli({ agent = "codex", prompt = true })
+  end, { silent = true, desc = "Prompt Codex with context" })
+  map("n", "<Leader>ad", function()
+    require("codecompanion").cli(
+      "#{diagnostics} Fix these diagnostics and run the relevant checks.",
+      { agent = "codex", focus = false, submit = true }
+    )
+  end, { silent = true, desc = "Fix diagnostics with Codex" })
+end
+EOF
+
